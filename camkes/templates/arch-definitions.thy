@@ -52,6 +52,9 @@ begin
         Array (SizedArray
         /*- if param.type == 'int' -*/
             (Numerical Integer)
+        /*- elif param.type == 'uint8_t' -*/
+	/*# HACK(bfiedler): this is certainly not supported, but it works #*/
+            (Textual char)
         /*- elif param.type == 'unsigned int' -*/
             (Numerical UnsignedInteger)
         /*- elif param.type == 'real' -*/
@@ -346,7 +349,7 @@ lemma refs_valid_/*? isabelle_connection(c.name) ?*/[rv_connections]:
   by (simp,
       rule conjI,
       simp add: wellformed_connector_def,
-      (subst ex_one_def, eval_filter cond_thms: fst_conv list.inject char.inject)+,
+      (subst ex_one_def, eval_filter eval_cond_thms: fst_conv list.inject char.inject)+,
       simp add: wellformed_CAMKES_simps)
 /*- endfor -*/
 
